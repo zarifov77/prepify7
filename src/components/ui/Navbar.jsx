@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion' // Added for smooth transition
+import { motion } from 'framer-motion'
 import { LogoFull } from './Logo'
 import { useTheme } from '../../context/ThemeContext'
 
@@ -12,13 +12,11 @@ const NAV_LINKS = [
 ]
 
 export default function NavBar() {
-  const { dark, toggle } = useTheme()
+  const { dark, toggle } = useTheme() // We use 'dark' here
   const [isScrolled, setIsScrolled] = useState(false)
 
-  // Listen to scroll events
   useEffect(() => {
     const handleScroll = () => {
-      // If user scrolls more than 20px, set minimized state to true
       setIsScrolled(window.scrollY > 20)
     }
     window.addEventListener('scroll', handleScroll)
@@ -28,7 +26,7 @@ export default function NavBar() {
   return (
     <div style={{
       position: 'fixed', 
-      top: 0, // Changed to 0 so we can control padding via motion.div
+      top: 0, 
       left: 0, 
       right: 0, 
       zIndex: 50,
@@ -36,39 +34,44 @@ export default function NavBar() {
       justifyContent: 'center',
       padding: '0 24px', 
       pointerEvents: 'none',
-      transition: 'all 0.4s ease',
     }}>
       <motion.nav 
-        // Framer Motion animations for the "minimize" effect
         initial={false}
         animate={{
-          marginTop: isScrolled ? 8 : 16, // Moves closer to top
-          maxWidth: isScrolled ? 900 : 1100, // Shrinks horizontally
-          paddingTop: isScrolled ? 6 : 10, // Thinner padding
-          paddingBottom: isScrolled ? 6 : 10,
+          marginTop: isScrolled ? 8 : 16,
+          maxWidth: isScrolled ? 940 : 1100, // Adjusted for better balance
+          paddingTop: isScrolled ? 8 : 12, 
+          paddingBottom: isScrolled ? 8 : 12,
+          // Subtle background shift on scroll
+          backgroundColor: isScrolled ? 'var(--bg-nav-solid)' : 'var(--bg-nav)',
         }}
-        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         style={{
           pointerEvents: 'auto',
           width: '100%', 
           display: 'flex', 
           alignItems: 'center', 
           justifyContent: 'space-between',
-          paddingLeft: 20,
-          paddingRight: 20,
-          background: 'var(--bg-nav)',
+          paddingLeft: 24,
+          paddingRight: 24,
           backdropFilter: 'var(--glass-blur)',
           WebkitBackdropFilter: 'var(--glass-blur)',
           border: '1px solid var(--border-nav)',
           borderRadius: 100,
-          boxShadow: 'var(--shadow-nav)',
-          transition: 'background 0.35s ease, border-color 0.35s ease',
+          boxShadow: isScrolled ? '0 20px 40px rgba(0,0,0,0.2)' : 'var(--shadow-nav)',
         }}
       >
 
-        {/* Logo */}
-        <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <LogoFull className="h-9" />
+        {/* Logo - Passing the 'dark' state as a filter or prop */}
+        <Link to="/" style={{ 
+          display: 'flex', 
+          alignItems: 'center',
+          transition: 'filter 0.3s ease'
+        }}>
+          {/* We use CSS filter to make the logo white in dark mode instantly */}
+          <div style={{ filter: dark ? 'brightness(0) invert(1)' : 'none' }}>
+             <LogoFull className="h-8" />
+          </div>
         </Link>
 
         {/* Nav links */}
@@ -78,12 +81,18 @@ export default function NavBar() {
               key={item.label}
               href={item.href}
               style={{
-                fontFamily: 'Sora, sans-serif', fontSize: '0.85rem', fontWeight: 500,
-                color: 'var(--text-muted)', padding: '7px 16px',
-                borderRadius: 100, textDecoration: 'none', transition: 'color 0.2s',
+                fontFamily: 'Sora, sans-serif', fontSize: '0.85rem', fontWeight: 600,
+                color: 'var(--text-muted)', padding: '8px 18px',
+                borderRadius: 100, textDecoration: 'none', transition: 'all 0.2s',
               }}
-              onMouseEnter={e => e.currentTarget.style.color = '#012BAA'}
-              onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+              onMouseEnter={e => {
+                e.currentTarget.style.color = 'var(--text-primary)';
+                e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.color = 'var(--text-muted)';
+                e.currentTarget.style.background = 'transparent';
+              }}
             >
               {item.label}
             </a>
@@ -91,20 +100,21 @@ export default function NavBar() {
         </div>
 
         {/* Right — toggle + auth buttons */}
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
 
-          {/* Dark / Light toggle */}
+          {/* Theme Toggle */}
           <button
             onClick={toggle}
-            title={dark ? 'Switch to Light' : 'Switch to Dark'}
             style={{
-              width: 38, height: 38, borderRadius: '50%',
-              border: '1.5px solid var(--border-subtle)',
-              background: 'var(--bg-pill)',
+              width: 36, height: 36, borderRadius: '50%',
+              border: '1px solid var(--border-nav)',
+              background: 'transparent',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: '1rem', cursor: 'pointer',
-              transition: 'all 0.3s ease', flexShrink: 0,
+              transition: 'transform 0.2s',
             }}
+            onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
           >
             {dark ? '☀️' : '🌙'}
           </button>
@@ -113,13 +123,10 @@ export default function NavBar() {
           <Link
             to="/login"
             style={{
-              fontFamily: 'Sora, sans-serif', fontSize: '0.83rem', fontWeight: 600,
-              color: 'var(--text-primary)', padding: '7px 18px',
-              borderRadius: 100, border: '1.5px solid var(--border-subtle)',
-              textDecoration: 'none', transition: 'all 0.2s',
+              fontFamily: 'Sora, sans-serif', fontSize: '0.83rem', fontWeight: 700,
+              color: 'var(--text-primary)', textDecoration: 'none',
+              padding: '0 10px'
             }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = '#012BAA'; e.currentTarget.style.color = '#012BAA' }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-subtle)'; e.currentTarget.style.color = 'var(--text-primary)' }}
           >
             Sign In
           </Link>
@@ -129,15 +136,16 @@ export default function NavBar() {
             to="/login"
             style={{
               fontFamily: 'Sora, sans-serif', fontSize: '0.83rem', fontWeight: 700,
-              color: '#fff', padding: '8px 20px', borderRadius: 100,
-              background: '#012BAA', textDecoration: 'none',
-              boxShadow: '0 4px 16px rgba(1,43,170,0.35)',
-              transition: 'opacity 0.2s, transform 0.2s',
+              color: '#fff', padding: '10px 24px', borderRadius: 100,
+              background: 'linear-gradient(135deg, #012BAA, #2d52d4)', 
+              textDecoration: 'none',
+              boxShadow: '0 8px 20px rgba(1,43,170,0.3)',
+              transition: 'all 0.2s',
             }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.88'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+            onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-1px)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
           >
-            Get Started →
+            Get Started
           </Link>
         </div>
       </motion.nav>
