@@ -1,0 +1,87 @@
+export const IELTS_WRITING_PROMPTS = {
+  task1: [
+    {
+      id: 'cam15-t1',
+      book: 'Cambridge 15',
+      test: 'Test 1',
+      prompt: 'The graph below shows the percentage of households in owned and rented accommodation in England and Wales between 1918 and 2011. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.',
+      type: 'line graph',
+      minWords: 150,
+      timeMinutes: 20,
+    },
+    {
+      id: 'cam15-t2',
+      book: 'Cambridge 15',
+      test: 'Test 2',
+      prompt: 'The charts below show the percentage of water used for different purposes in six areas of the world. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.',
+      type: 'pie charts',
+      minWords: 150,
+      timeMinutes: 20,
+    },
+    {
+      id: 'cam16-t1',
+      book: 'Cambridge 16',
+      test: 'Test 1',
+      prompt: 'The diagram below shows how a central heating system in a house works. Summarise the information by selecting and reporting the main features.',
+      type: 'process diagram',
+      minWords: 150,
+      timeMinutes: 20,
+    },
+  ],
+  task2: [
+    {
+      id: 'cam15-t2-e',
+      book: 'Cambridge 15',
+      test: 'Test 1',
+      prompt: 'Some people believe that it is best to accept a bad situation, such as an unsatisfactory job or shortage of money. Others argue that it is better to try to improve such situations. Discuss both these views and give your own opinion.',
+      type: 'discussion',
+      minWords: 250,
+      timeMinutes: 40,
+    },
+    {
+      id: 'cam16-t2-e',
+      book: 'Cambridge 16',
+      test: 'Test 1',
+      prompt: 'Some people think that it is more important to spend money on roads and motorways than on public transport. To what extent do you agree or disagree?',
+      type: 'opinion',
+      minWords: 250,
+      timeMinutes: 40,
+    },
+    {
+      id: 'cam17-t2-e',
+      book: 'Cambridge 17',
+      test: 'Test 1',
+      prompt: 'In many countries, people are choosing to have fewer children. What are the reasons for this trend? What are the effects of this trend on society?',
+      type: 'problem-solution',
+      minWords: 250,
+      timeMinutes: 40,
+    },
+  ],
+}
+
+export const IELTS_READING_TESTS = [
+  { id: 'cam11-r1', book: 'Cambridge 11', test: 'Test 1', passages: 3, questions: 40, duration: 60 },
+  { id: 'cam11-r2', book: 'Cambridge 11', test: 'Test 2', passages: 3, questions: 40, duration: 60 },
+  { id: 'cam12-r1', book: 'Cambridge 12', test: 'Test 1', passages: 3, questions: 40, duration: 60 },
+  { id: 'cam13-r1', book: 'Cambridge 13', test: 'Test 1', passages: 3, questions: 40, duration: 60 },
+  { id: 'cam14-r1', book: 'Cambridge 14', test: 'Test 1', passages: 3, questions: 40, duration: 60 },
+  { id: 'cam15-r1', book: 'Cambridge 15', test: 'Test 1', passages: 3, questions: 40, duration: 60 },
+  { id: 'cam16-r1', book: 'Cambridge 16', test: 'Test 1', passages: 3, questions: 40, duration: 60 },
+  { id: 'cam17-r1', book: 'Cambridge 17', test: 'Test 1', passages: 3, questions: 40, duration: 60 },
+  { id: 'cam18-r1', book: 'Cambridge 18', test: 'Test 1', passages: 3, questions: 40, duration: 60 },
+  { id: 'cam19-r1', book: 'Cambridge 19', test: 'Test 1', passages: 3, questions: 40, duration: 60 },
+  { id: 'cam20-r1', book: 'Cambridge 20', test: 'Test 1', passages: 3, questions: 40, duration: 60 },
+]
+
+export const IELTS_LISTENING_TESTS = [
+  { id: 'cam11-l1', book: 'Cambridge 11', test: 'Test 1', sections: 4, questions: 40, duration: 30 },
+  { id: 'cam12-l1', book: 'Cambridge 12', test: 'Test 1', sections: 4, questions: 40, duration: 30 },
+  { id: 'cam13-l1', book: 'Cambridge 13', test: 'Test 1', sections: 4, questions: 40, duration: 30 },
+  { id: 'cam14-l1', book: 'Cambridge 14', test: 'Test 1', sections: 4, questions: 40, duration: 30 },
+  { id: 'cam15-l1', book: 'Cambridge 15', test: 'Test 1', sections: 4, questions: 40, duration: 30 },
+  { id: 'cam16-l1', book: 'Cambridge 16', test: 'Test 1', sections: 4, questions: 40, duration: 30 },
+  { id: 'cam17-l1', book: 'Cambridge 17', test: 'Test 1', sections: 4, questions: 40, duration: 30 },
+  { id: 'cam18-l1', book: 'Cambridge 18', test: 'Test 1', sections: 4, questions: 40, duration: 30 },
+  { id: 'cam19-l1', book: 'Cambridge 19', test: 'Test 1', sections: 4, questions: 40, duration: 30 },
+  { id: 'cam20-l1', book: 'Cambridge 20', test: 'Test 1', sections: 4, questions: 40, duration: 30 },
+]
