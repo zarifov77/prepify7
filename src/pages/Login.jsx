@@ -99,8 +99,8 @@ export default function Login() {
             {step === 2 ? '🎯' : '✨'}
           </div>
           
-          {/* Логотип перенесен сюда (на правую сторону внутри карточки) */}
-          <Link to="/" className="opacity-90 hover:opacity-100 transition-opacity">
+          {/* Логотип: Only added the filter style here to make it white */}
+          <Link to="/" className="opacity-90 hover:opacity-100 transition-opacity" style={{ filter: 'brightness(0) invert(1)' }}>
             <LogoFull className="h-8" />
           </Link>
         </div>

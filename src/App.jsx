@@ -15,6 +15,7 @@ import IELTSReading from './components/ielts/IELTSReading'
 import IELTSWriting from './components/ielts/IELTSWriting'
 import NotFound from './pages/NotFound'
 import useAuthStore from './store/authStore'
+import About from './pages/About'
 
 function ProtectedRoute({ children }) {
   const { user } = useAuthStore()
@@ -61,6 +62,7 @@ export default function App() {
           <Route path="ielts/writing" element={<IELTSWriting />} />
         </Route>
         <Route path="*" element={<NotFound />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { LogoFull } from '../ui/Logo'
-import { Send, Instagram, Github } from 'lucide-react' // Modern icons
+import { useTheme } from '../../context/ThemeContext' // Import your theme hook
+import { Send, Instagram, Github } from 'lucide-react'
 
 const LINKS = {
   Product: [
@@ -11,7 +12,7 @@ const LINKS = {
     { label: 'IELTS Writing', to: '/dashboard/ielts/writing' },
   ],
   Company: [
-    { label: 'About Us', href: '#' },
+    { label: 'About Us', to: '/about' },
     { label: 'Blog', href: '#' },
     { label: 'Careers', href: '#' },
     { label: 'Press', href: '#' },
@@ -31,11 +32,13 @@ const SOCIALS = [
 ]
 
 export default function Footer() {
+  const { dark } = useTheme() // Get the dark mode state
+
   return (
     <footer
       className="relative z-10 px-6 pt-14 pb-8"
       style={{
-        background: 'var(--bg-nav)', // Use same variable as Navbar
+        background: 'var(--bg-nav)',
         backdropFilter: 'var(--glass-blur)',
         WebkitBackdropFilter: 'var(--glass-blur)',
         borderTop: '1px solid var(--border-nav)',
@@ -47,7 +50,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="col-span-1">
-            <LogoFull className="h-10 mb-4" />
+            {/* Added Link wrapper and filter logic */}
+            <Link 
+              to="/" 
+              className="inline-block mb-4 transition-opacity hover:opacity-80"
+              style={{ filter: dark ? 'brightness(0) invert(1)' : 'none' }}
+            >
+              <LogoFull className="h-10" />
+            </Link>
             <p className="font-dm text-sm text-slate-400 leading-relaxed max-w-[220px]">
               The ultimate SAT & IELTS preparation ecosystem. Built for students who refuse
               to settle for average.
